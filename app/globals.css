@@ -1,21 +1,305 @@
+@import url("https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --radius: 0.75rem;
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+@layer utilities {
+  .flex-between {
+    @apply flex justify-between items-center;
+  }
+
+  .text-display {
+    @apply text-4xl font-bold text-slate-900 leading-tight;
+  }
+
+  .text-heading {
+    @apply text-2xl font-semibold text-slate-800;
+  }
+
+  .text-subheading {
+    @apply text-xl font-medium text-slate-700;
+  }
+
+  .text-body {
+    @apply text-base text-slate-600;
+  }
+
+  .text-small {
+    @apply text-sm text-slate-500;
+  }
+
+  .container-section {
+    @apply w-full bg-gradient-to-br from-indigo-50 to-purple-50 min-h-[15rem] flex justify-center items-center flex-col py-12 px-6;
+  }
+
+  .tag-modern {
+    @apply bg-indigo-100 px-4 py-2 font-medium text-indigo-700 rounded-full transition-colors hover:bg-indigo-200;
+  }
+
+  .heading-hero {
+    @apply bg-white/90 backdrop-blur-sm px-8 py-4 font-bold text-slate-900 sm:text-5xl text-3xl max-w-5xl text-center my-8 rounded-2xl shadow-lg;
+  }
+
+  .sub-heading-hero {
+    @apply font-medium text-xl text-slate-700 max-w-2xl text-center break-words;
+  }
+
+  .section-wrapper {
+    @apply px-6 py-12 max-w-7xl mx-auto;
+  }
+
+  .grid-cards {
+    @apply grid lg:grid-cols-3 sm:grid-cols-2 gap-6;
+  }
+
+  .grid-cards-compact {
+    @apply grid sm:grid-cols-2 gap-6;
+  }
+
+  .card-modern {
+    @apply bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden border border-slate-100;
+  }
+
+  .profile-container {
+    @apply w-full py-16 px-6 max-w-7xl mx-auto lg:flex-row flex-col flex gap-8;
+  }
+
+  .profile-card {
+    @apply w-96 p-6 flex flex-col gap-4 bg-white shadow-xl rounded-2xl relative z-0 h-fit max-lg:w-full;
+  }
+
+  /* Search Form Styles */
+  .search-form-container {
+    @apply relative flex w-full max-w-2xl mx-auto items-center gap-2 rounded-full bg-white/90 px-4 py-2 shadow-lg backdrop-blur-sm transition-all focus-within:shadow-xl;
+  }
+
+  .search-form-icon {
+    @apply h-5 w-5 text-slate-400 group-focus-within:text-primary-500;
+  }
+
+  .search-form-input {
+    @apply flex-1 border-0 bg-transparent p-2 text-base text-slate-900 placeholder:text-slate-400 focus:outline-none;
+  }
+
+  .search-form-reset {
+    @apply h-8 w-8 rounded-full hover:bg-slate-100 flex items-center justify-center;
+  }
+
+  .search-form-submit {
+    @apply h-8 w-8 rounded-full bg-primary-600 hover:bg-primary-700 flex items-center justify-center;
+  }
+
+  .search-form-icon-small {
+    @apply h-4 w-4;
+  }
+
+  /* Hero Section Styles */
+  .hero-container {
+    @apply flex flex-col items-center justify-center text-center px-4 py-16 bg-gradient-to-b from-slate-50 to-primary-50;
+  }
+
+  .hero-title {
+    @apply text-4xl md:text-5xl font-bold text-slate-900 max-w-4xl mx-auto mb-6;
+  }
+
+  .hero-subtitle {
+    @apply text-lg md:text-xl text-slate-600 max-w-2xl mx-auto mb-8;
+  }
+
+  .button-primary {
+    @apply bg-indigo-600 text-white px-6 py-3 rounded-full font-medium hover:bg-indigo-700 transition-colors;
+  }
+
+  .button-secondary {
+    @apply bg-slate-100 text-slate-700 px-6 py-3 rounded-full font-medium hover:bg-slate-200 transition-colors;
+  }
+
+  .markdown-editor {
+    @apply rounded-xl border border-slate-200 shadow-sm;
+  }
+  /* Recipe Card */
+  .recipe-card {
+    @apply bg-white rounded-2xl overflow-hidden flex flex-col gap-0 border border-slate-100 shadow-sm hover:shadow-xl transition-all duration-300 relative;
+  }
+
+  .recipe-card-image-wrapper {
+    @apply relative h-64 w-full overflow-hidden;
+  }
+
+  .recipe-card-image {
+    @apply w-full h-full object-cover transition-transform duration-500 group-hover:scale-105;
+  }
+
+  .recipe-card-overlay {
+    @apply absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent;
+  }
+
+  .recipe-card-category {
+    @apply absolute top-4 right-4 px-4 py-1.5 rounded-full text-sm font-medium bg-white/90 backdrop-blur-sm text-slate-800 shadow-sm;
+  }
+
+  .recipe-card-content {
+    @apply p-6 flex flex-col gap-4;
+  }
+
+  .recipe-card-header {
+    @apply flex items-center justify-between mb-2;
+  }
+
+  .recipe-card-author {
+    @apply flex items-center gap-3;
+  }
+
+  .recipe-card-author-image {
+    @apply w-10 h-10 rounded-full border-2 border-white shadow-md;
+  }
+
+  .recipe-card-meta {
+    @apply flex items-center gap-4 text-sm text-slate-500;
+  }
+
+  .recipe-card-title {
+    @apply text-2xl font-bold text-slate-900 leading-tight hover:text-primary-600 transition-colors line-clamp-2;
+  }
+
+  .recipe-card-description {
+    @apply text-slate-600 line-clamp-2 mt-2;
+  }
+
+  .recipe-card-footer {
+    @apply flex justify-between items-center pt-4 mt-4 border-t border-slate-100;
+  }
+
+  .recipe-card-stats {
+    @apply flex items-center gap-2 text-slate-600;
+  }
+
+  .recipe-card-button {
+    @apply inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium text-white bg-primary-600 hover:bg-primary-700 transition-colors;
+  }
+
+  /* Recipe Details Hero Section */
+  .recipe-category-badge {
+    @apply flex items-center px-4 py-2 rounded-full bg-white/90 backdrop-blur-sm text-slate-900 font-medium text-sm shadow-lg;
+  }
+
+  .recipe-hero-title {
+    @apply xs:text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-tight;
+  }
+
+  .recipe-hero-subtitle {
+    @apply text-lg md:text-xl text-white/90 max-w-2xl;
+  }
+
+  /* Stats Grid */
+  .recipe-stats-grid {
+    @apply grid grid-cols-3 gap-4;
+  }
+
+  .recipe-stat-card {
+    @apply flex justify-center lg:justify-start items-center gap-4 bg-white rounded-xl p-2 lg:p-4 shadow-lg;
+  }
+
+  .recipe-stat-icon {
+    @apply w-8 h-8 text-primary-600;
+  }
+
+  .recipe-stat-value {
+    @apply text-lg font-bold text-slate-900;
+  }
+
+  .recipe-stat-label {
+    @apply text-sm text-slate-500 hidden lg:block;
+  }
+
+  /* Author Card */
+  .recipe-author-card {
+    @apply bg-white rounded-xl p-6 flex items-center gap-6 shadow-sm hover:shadow-md transition-shadow;
+  }
+
+  .recipe-author-name {
+    @apply text-lg font-semibold text-slate-900 mb-1;
+  }
+
+  .recipe-author-bio {
+    @apply text-[1rem]  text-slate-600 line-clamp-2;
+  }
+
+  /* Ingredients Card */
+  .recipe-ingredients-card {
+    @apply bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow;
+  }
+
+  .recipe-section-title {
+    @apply flex items-center gap-2 text-xl font-semibold text-slate-900 mb-6;
+  }
+
+  .recipe-ingredients-list {
+    @apply space-y-3 mb-6;
+  }
+
+  .recipe-ingredient-item {
+    @apply flex items-center gap-3 text-slate-700 hover:text-slate-900 transition-colors;
+  }
+
+  .recipe-ingredient-checkbox {
+    @apply w-5 h-5 rounded border-2 border-primary-200 hover:border-primary-400 transition-colors cursor-pointer;
+  }
+
+  /* Tags */
+  .recipe-tags-container {
+    @apply flex flex-wrap gap-2 pt-4 border-t border-slate-100;
+  }
+
+  .recipe-tag {
+    @apply px-3 py-1 bg-slate-100 text-slate-600 rounded-full text-sm hover:bg-slate-200 transition-colors cursor-pointer;
+  }
+
+  /* Content Card */
+  .recipe-content-card {
+    @apply bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow;
+  }
+
+  .recipe-description {
+    @apply text-slate-700 md:text-lg text-justify lg:text-xl leading-relaxed;
+  }
+
+  .recipe-instructions {
+    @apply text-[1rem] lg:text-lg prose prose-slate max-w-none prose-headings:text-slate-900 prose-p:text-slate-700 prose-strong:text-slate-900 prose-strong:font-semibold;
+  }
+
+  @layer utilities {
+    /* Form Styles */
+    .recipe-form-card {
+      @apply bg-white rounded-xl p-6 shadow-sm border border-slate-100;
+    }
+  
+    .form-group {
+      @apply space-y-2;
+    }
+  
+    .form-input {
+      @apply h-10 rounded-lg border-slate-200 bg-white px-3 text-sm 
+      ring-offset-white placeholder:text-slate-500 focus-visible:outline-none 
+      focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2;
+    }
+  
+    .form-textarea {
+      @apply rounded-lg border-slate-200 bg-white px-3 py-2 text-sm 
+      ring-offset-white placeholder:text-slate-500 focus-visible:outline-none 
+      focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2;
+    }
+  
+    .ingredient-tag {
+      @apply inline-flex items-center px-3 py-1 rounded-full text-sm
+      font-medium bg-slate-100 text-slate-700 hover:bg-slate-200 transition-colors;
+    }
+  }
 }
