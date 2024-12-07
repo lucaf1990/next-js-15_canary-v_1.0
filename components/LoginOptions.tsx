@@ -70,16 +70,15 @@ export function LoginDialog() {
               Continue with Google
             </Button>
           </form>
-
         </div>
 
         <div className="flex justify-center">
-            <span className="w-2/3 border-t border-slate-200" />
-          </div>
+          <span className="w-2/3 border-t border-slate-200" />
+        </div>
 
-          <p className="text-center text-sm text-slate-500">
-            By continuing, you agree to our Terms of Service and Privacy Policy.
-          </p>
+        <p className="text-center text-sm text-slate-500">
+          By continuing, you agree to our Terms of Service and Privacy Policy.
+        </p>
       </DialogContent>
     </Dialog>
   );

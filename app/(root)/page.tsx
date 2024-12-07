@@ -1,4 +1,3 @@
-import { auth } from "@/auth";
 import RecipeCard, { RecipeType } from "@/components/RecipeCard";
 import SearchForm from "@/components/SearchForm";
 import { RECIPE_QUERY } from "@/lib/query";
@@ -12,8 +11,7 @@ export default async function Home({
   const query = (await searchParams).query;
   const params = { search: query || null };
   const { data: recipes } = await sanityFetch({ query: RECIPE_QUERY, params });
-  const session = await auth()
-  console.log(session) 
+
   return (
     <main>
       <section className="hero-container">

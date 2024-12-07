@@ -43,7 +43,10 @@ const RecipeCard = ({ recipe }: { recipe: RecipeType }) => {
           <Link href={`/user/${author?._id}`}>
             <div className="recipe-card-author">
               <Image
-                src={author?.image || "/fallback-profile.jpg"}
+                src={
+                  author?.image ||
+                  "https://cdn-icons-png.flaticon.com/512/10337/10337609.png"
+                }
                 alt={author?.name || "Author"}
                 width={40}
                 height={40}

@@ -142,7 +142,13 @@ export type Recipe = {
   views: number;
   image: string;
   description: string;
-  category: "Breakfast" | "Lunch" | "Dinner" | "Dessert" | "Snack" | "Appetizer";
+  category:
+    | "Breakfast"
+    | "Lunch"
+    | "Dinner"
+    | "Dessert"
+    | "Snack"
+    | "Appetizer";
   ingredients: Array<string>;
   tags: Array<string>;
   steps: string;
@@ -170,44 +176,67 @@ export type Author = {
   bio?: string;
 };
 
-export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageHotspot | SanityImageCrop | SanityFileAsset | SanityImageAsset | SanityImageMetadata | Geopoint | SanityAssetSourceData | Recipe | Slug | Author;
+export type AllSanitySchemaTypes =
+  | SanityImagePaletteSwatch
+  | SanityImagePalette
+  | SanityImageDimensions
+  | SanityImageHotspot
+  | SanityImageCrop
+  | SanityFileAsset
+  | SanityImageAsset
+  | SanityImageMetadata
+  | Geopoint
+  | SanityAssetSourceData
+  | Recipe
+  | Slug
+  | Author;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: lib/query.ts
 // Variable: RECIPE_QUERY
 // Query: *[_type == "recipe"     && defined(slug.current)     && !defined($search) || title match $search || category match $search || author->name match $search]     | order(_createdAt desc) {    _id,    _createdAt,    author -> {      _id,      name,      image,      bio,    },    title,    views,    image,    description,    category,}
-export type RECIPE_QUERYResult = Array<{
-  _id: string;
-  _createdAt: string;
-  author: null;
-  title: null;
-  views: null;
-  image: string | null;
-  description: null;
-  category: null;
-} | {
-  _id: string;
-  _createdAt: string;
-  author: null;
-  title: string | null;
-  views: null;
-  image: null;
-  description: string | null;
-  category: null;
-} | {
-  _id: string;
-  _createdAt: string;
-  author: {
-    _id: string;
-    name: string | null;
-    image: string | null;
-    bio: string | null;
-  };
-  title: string;
-  views: number;
-  image: string;
-  description: string;
-  category: "Appetizer" | "Breakfast" | "Dessert" | "Dinner" | "Lunch" | "Snack";
-}>;
+export type RECIPE_QUERYResult = Array<
+  | {
+      _id: string;
+      _createdAt: string;
+      author: null;
+      title: null;
+      views: null;
+      image: string | null;
+      description: null;
+      category: null;
+    }
+  | {
+      _id: string;
+      _createdAt: string;
+      author: null;
+      title: string | null;
+      views: null;
+      image: null;
+      description: string | null;
+      category: null;
+    }
+  | {
+      _id: string;
+      _createdAt: string;
+      author: {
+        _id: string;
+        name: string | null;
+        image: string | null;
+        bio: string | null;
+      };
+      title: string;
+      views: number;
+      image: string;
+      description: string;
+      category:
+        | "Appetizer"
+        | "Breakfast"
+        | "Dessert"
+        | "Dinner"
+        | "Lunch"
+        | "Snack";
+    }
+>;
 // Variable: RECIPE_QUERY_BY_ID
 // Query: *[_type == "recipe" && _id == $id][0]{    _id,    _createdAt,    slug,    author -> {      _id,      name,      image,      bio,      username,    },    title,    views,    image,    description,    category,    ingredients,    tags,    steps,    cookingTime,    servings,}
 export type RECIPE_QUERY_BY_IDResult = {
@@ -225,7 +254,13 @@ export type RECIPE_QUERY_BY_IDResult = {
   views: number;
   image: string;
   description: string;
-  category: "Appetizer" | "Breakfast" | "Dessert" | "Dinner" | "Lunch" | "Snack";
+  category:
+    | "Appetizer"
+    | "Breakfast"
+    | "Dessert"
+    | "Dinner"
+    | "Lunch"
+    | "Snack";
   ingredients: Array<string>;
   tags: Array<string>;
   steps: string;
@@ -243,8 +278,8 @@ export type VIEWS_QUERY_BY_IDResult = {
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    "*[_type == \"recipe\" \n    && defined(slug.current) \n    && !defined($search) || title match $search || category match $search || author->name match $search] \n    | order(_createdAt desc) {\n    _id,\n    _createdAt,\n    author -> {\n      _id,\n      name,\n      image,\n      bio,\n    },\n    title,\n    views,\n    image,\n    description,\n    category,\n}": RECIPE_QUERYResult;
-    "*[_type == \"recipe\" && _id == $id][0]{\n    _id,\n    _createdAt,\n    slug,\n    author -> {\n      _id,\n      name,\n      image,\n      bio,\n      username,\n    },\n    title,\n    views,\n    image,\n    description,\n    category,\n    ingredients,\n    tags,\n    steps,\n    cookingTime,\n    servings,\n}": RECIPE_QUERY_BY_IDResult;
-    "*[_type == \"recipe\" && _id == $id][0]{\n  _id,\n  views\n  }": VIEWS_QUERY_BY_IDResult;
+    '*[_type == "recipe" \n    && defined(slug.current) \n    && !defined($search) || title match $search || category match $search || author->name match $search] \n    | order(_createdAt desc) {\n    _id,\n    _createdAt,\n    author -> {\n      _id,\n      name,\n      image,\n      bio,\n    },\n    title,\n    views,\n    image,\n    description,\n    category,\n}': RECIPE_QUERYResult;
+    '*[_type == "recipe" && _id == $id][0]{\n    _id,\n    _createdAt,\n    slug,\n    author -> {\n      _id,\n      name,\n      image,\n      bio,\n      username,\n    },\n    title,\n    views,\n    image,\n    description,\n    category,\n    ingredients,\n    tags,\n    steps,\n    cookingTime,\n    servings,\n}': RECIPE_QUERY_BY_IDResult;
+    '*[_type == "recipe" && _id == $id][0]{\n  _id,\n  views\n  }': VIEWS_QUERY_BY_IDResult;
   }
 }

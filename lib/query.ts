@@ -43,11 +43,26 @@ export const RECIPE_QUERY_BY_ID =
     servings,
 }`);
 
-export const VIEWS_QUERY_BY_ID = defineQuery(`*[_type == "recipe" && _id == $id][0]{
+export const VIEWS_QUERY_BY_ID =
+  defineQuery(`*[_type == "recipe" && _id == $id][0]{
   _id,
   views
-  }`)
+  }`);
 
+export const GITHUB_AUTHOR_QUERY = `
+  *[_type == "author" && id == $id][0] {
+    _id,
+    name,
+    email,
+    image
+  }
+`;
 
-export const GITHUB_AUTHOR_QUERY = `*[_type == "author" && github_id == $id][0]`
-export const GOOGLE_AUTHOR_QUERY = `*[_type == "author" && email == $email][0]`
+export const GOOGLE_AUTHOR_QUERY = `
+  *[_type == "author" && id == $id][0] {
+    _id,
+    name,
+    email,
+    image
+  }
+`;

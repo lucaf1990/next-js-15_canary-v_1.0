@@ -1,11 +1,22 @@
 import { RECIPE_QUERY_BY_ID } from "@/lib/query";
 import { client } from "@/sanity/lib/client";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import React, { Suspense } from "react";
 import Image from "next/image";
-import { Clock, Users, ChefHat, UtensilsCrossed, Eye } from "lucide-react";
+import {
+  Clock,
+  Users,
+  ChefHat,
+  UtensilsCrossed,
+  Eye,
+} from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
 import Views from "@/components/Views";
+import { auth } from "@/auth";
+import ViewRecipeDialog from "@/components/EditRecipe";
+
+import { writeClient } from "@/sanity/lib/write";
+import DeleteRecipeDialog from "@/components/deleteRecipeDialog";
 
 export const experimental_ppr = true;
 
@@ -13,6 +24,7 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
   const id = (await params).id;
   const detailsRecipes = await client.fetch(RECIPE_QUERY_BY_ID, { id });
   if (!detailsRecipes) return notFound();
+  const session = await auth();
 
   return (
     <main className="min-h-screen bg-slate-50 pb-20">
@@ -20,7 +32,20 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-30">
         {/* Title and description section */}
+
         <div className="pb-10 pt-10">
+          {detailsRecipes.author._id === session?.user?.id && (
+            <div className="flex gap-2">
+              <ViewRecipeDialog recipe={detailsRecipes} />
+              <DeleteRecipeDialog
+                deleteRecipe={async () => {
+                  "use server";
+                  await writeClient.delete(id);
+                  redirect("/");
+                }}
+              />
+            </div>
+          )}
           <div>
             <h1 className="recipe-hero-title">{detailsRecipes.title}</h1>
             <p className="recipe-description mt-4">
@@ -70,11 +95,13 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
           <div className="recipe-stat-card">
             <Eye className="recipe-stat-icon animate-pulse opacity-90" />
             <div>
-              <Suspense fallback={<Skeleton className=""/>}>
-              <Views id={detailsRecipes._id}/>
+              <Suspense fallback={<Skeleton className="" />}>
+                <Views id={detailsRecipes._id} />
               </Suspense>
 
-              <p className="recipe-stat-label">{detailsRecipes.views > 1 ? `Views` : `View`}</p>
+              <p className="recipe-stat-label">
+                {detailsRecipes.views > 1 ? `Views` : `View`}
+              </p>
             </div>
           </div>
         </div>
