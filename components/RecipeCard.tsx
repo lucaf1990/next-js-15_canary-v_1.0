@@ -2,10 +2,11 @@ import { EyeIcon, ChefHat, ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import { Author, Recipe } from "@/sanity/types";
+import { FIND_USER_RECIPE_BY_ID_QUERYResult, RECIPE_QUERYResult } from "@/sanity/types";
 import { formatDate } from "@/lib/utils";
 
-export type RecipeType = Omit<Recipe, "author"> & { author?: Author };
+export type RecipeType = RECIPE_QUERYResult[number] |
+FIND_USER_RECIPE_BY_ID_QUERYResult[number]
 
 const RecipeCard = ({ recipe }: { recipe: RecipeType }) => {
   const {

@@ -60,9 +60,24 @@ export const GITHUB_AUTHOR_QUERY = `
 
 export const GOOGLE_AUTHOR_QUERY = `
   *[_type == "author" && id == $id][0] {
-    _id,
-    name,
-    email,
-    image
+...
   }
 `;
+
+export const FIND_USER_RECIPE_BY_ID_QUERY = defineQuery(`*[_type == "recipe" 
+  &&  author-> _id match $id] 
+  | order(_createdAt desc) {
+  _id,
+  _createdAt,
+  author -> {
+    _id,
+    name,
+    image,
+    bio,
+  },
+  title,
+  views,
+  image,
+  description,
+  category,
+}`);

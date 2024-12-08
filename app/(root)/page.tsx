@@ -1,4 +1,4 @@
-import RecipeCard, { RecipeType } from "@/components/RecipeCard";
+import RecipeCard from "@/components/RecipeCard";
 import SearchForm from "@/components/SearchForm";
 import { RECIPE_QUERY } from "@/lib/query";
 import { sanityFetch, SanityLive } from "@/sanity/lib/live";
@@ -31,7 +31,7 @@ export default async function Home({
         {recipes.length > 0 ? (
           <ul className="grid-cards">
             {recipes.map((recipe) => (
-              <RecipeCard recipe={recipe as RecipeType} key={recipe._id} />
+              <RecipeCard recipe={recipe} key={recipe._id} />
             ))}
           </ul>
         ) : (
