@@ -17,7 +17,7 @@ export const createRecipe = async (state: unknown, form: FormData) => {
 
   try {
     const formData = Object.fromEntries(form);
-    
+
     // Parse arrays from JSON strings
     const ingredients = JSON.parse(formData.ingredients as string);
     const tags = JSON.parse(formData.tags as string);
@@ -44,7 +44,6 @@ export const createRecipe = async (state: unknown, form: FormData) => {
       );
       slug = `${baseSlug}-${slugCount + 1}`;
     }
-
 
     const recipe = {
       _type: "recipe",
@@ -96,7 +95,7 @@ export const patchRecipe = async (state: unknown, form: FormData) => {
 
   try {
     const formData = Object.fromEntries(form);
-  
+
     const ingredients = JSON.parse(formData.ingredients as string);
     const tags = JSON.parse(formData.tags as string);
     const recipe = {
@@ -121,7 +120,6 @@ export const patchRecipe = async (state: unknown, form: FormData) => {
       .patch(formData.id as string)
       .set(recipe)
       .commit();
-
 
     return parseServerActionResponse({
       data: result,

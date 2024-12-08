@@ -3,13 +3,7 @@ import { client } from "@/sanity/lib/client";
 import { notFound, redirect } from "next/navigation";
 import React, { Suspense } from "react";
 import Image from "next/image";
-import {
-  Clock,
-  Users,
-  ChefHat,
-  UtensilsCrossed,
-  Eye,
-} from "lucide-react";
+import { Clock, Users, ChefHat, UtensilsCrossed, Eye } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
 import Views from "@/components/Views";
 import { auth } from "@/auth";
@@ -19,13 +13,59 @@ import { writeClient } from "@/sanity/lib/write";
 import DeleteRecipeDialog from "@/components/deleteRecipeDialog";
 
 export const experimental_ppr = true;
+import type { Metadata, ResolvingMetadata } from 'next'
 
+
+// Add the generateMetadata function before your page component
+export async function generateMetadata(
+  { params }: { params: Promise<{ id: string }> },
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  // Get the id and fetch recipe data
+  const id = (await params).id;
+  const recipe = await client.fetch(RECIPE_QUERY_BY_ID, { id });
+  
+  // Get parent metadata (if any)
+  const previousImages = (await parent).openGraph?.images || []
+  
+  return {
+    title: `${recipe?.title} | Recipe`,
+    description: recipe?.description,
+    authors: [{ name: recipe?.author.name || "" }],
+    openGraph: {
+      title: recipe?.title,
+      description: recipe?.description,
+      images: [
+        {
+          url: recipe?.image || "",
+          width: 1200,
+          height: 630,
+          alt: recipe?.title,
+        },
+        ...previousImages
+      ],
+      type: 'article',
+      publishedTime: recipe?._createdAt,
+      authors: recipe?.author.name,
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: recipe?.title,
+      description: recipe?.description,
+      images: [recipe?.image || ""],
+      creator: `@${recipe?.author?.name?.replace(/\s+/g, '')}`,
+    },
+    keywords: recipe?.tags,
+    category: recipe?.category,
+  }
+}
 const page = async ({ params }: { params: Promise<{ id: string }> }) => {
   const id = (await params).id;
   const detailsRecipes = await client.fetch(RECIPE_QUERY_BY_ID, { id });
+
   if (!detailsRecipes) return notFound();
   const session = await auth();
-
+  console.log(typeof session?.user?.id);
   return (
     <main className="min-h-screen bg-slate-50 pb-20">
       {/* Full-width hero image with overlay */}
@@ -141,7 +181,7 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
                       <span className="recipe-ingredient-checkbox" />
                       {ingredient}
                     </li>
-                  )
+                  ),
                 )}
               </ul>
               <div className="recipe-tags-container">

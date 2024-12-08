@@ -59,6 +59,10 @@
     @apply grid lg:grid-cols-3 sm:grid-cols-2 gap-6;
   }
 
+  .grid-cards-user-profile {
+    @apply grid lg:grid-cols-2 sm:grid-cols-2 gap-6;
+  }
+
   .grid-cards-compact {
     @apply grid sm:grid-cols-2 gap-6;
   }

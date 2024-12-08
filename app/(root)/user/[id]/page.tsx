@@ -79,22 +79,20 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
         </div>
 
         {/* Recipe Grid */}
+        {/* Recipe Grid */}
         <div className="mt-8">
           <h2 className="text-xl font-semibold text-slate-900 mb-6">
             {detailsRecipes.length === 0
               ? "You still have no recipes published"
               : `Chef ${user.name}'s has ${detailsRecipes.length} recipes published`}
           </h2>
-
-          {detailsRecipes.length
-            ? detailsRecipes.map((recipe) => {
-                return (
-                  <ul key={recipe._id} className="grid-cards">
-                    <RecipeCard  recipe={recipe} />
-                  </ul>
-                );
-              })
-            : null}
+          {detailsRecipes.length ? (
+            <ul className="grid-cards-user-profile">
+              {detailsRecipes.slice(0, 5).map((recipe) => (
+                <RecipeCard key={recipe._id} recipe={recipe} />
+              ))}
+            </ul>
+          ) : null}
         </div>
       </div>
     </main>

@@ -1,6 +1,5 @@
 import React from "react";
 import Navbar from "@/components/Navbar";
-import { Analytics } from "@vercel/analytics/react"
 export default function Layout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
@@ -8,7 +7,7 @@ export default function Layout({
     <main className="font-work-sans">
       <Navbar />
       {children}
-      <Analytics/>
+
     </main>
   );
 }
