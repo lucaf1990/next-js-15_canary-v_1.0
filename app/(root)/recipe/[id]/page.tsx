@@ -13,21 +13,20 @@ import { writeClient } from "@/sanity/lib/write";
 import DeleteRecipeDialog from "@/components/deleteRecipeDialog";
 
 export const experimental_ppr = true;
-import type { Metadata, ResolvingMetadata } from 'next'
-
+import type { Metadata, ResolvingMetadata } from "next";
 
 // Add the generateMetadata function before your page component
 export async function generateMetadata(
   { params }: { params: Promise<{ id: string }> },
-  parent: ResolvingMetadata
+  parent: ResolvingMetadata,
 ): Promise<Metadata> {
   // Get the id and fetch recipe data
   const id = (await params).id;
   const recipe = await client.fetch(RECIPE_QUERY_BY_ID, { id });
-  
+
   // Get parent metadata (if any)
-  const previousImages = (await parent).openGraph?.images || []
-  
+  const previousImages = (await parent).openGraph?.images || [];
+
   return {
     title: `${recipe?.title} | Recipe`,
     description: recipe?.description,
@@ -42,22 +41,22 @@ export async function generateMetadata(
           height: 630,
           alt: recipe?.title,
         },
-        ...previousImages
+        ...previousImages,
       ],
-      type: 'article',
+      type: "article",
       publishedTime: recipe?._createdAt,
       authors: recipe?.author.name,
     },
     twitter: {
-      card: 'summary_large_image',
+      card: "summary_large_image",
       title: recipe?.title,
       description: recipe?.description,
       images: [recipe?.image || ""],
-      creator: `@${recipe?.author?.name?.replace(/\s+/g, '')}`,
+      creator: `@${recipe?.author?.name?.replace(/\s+/g, "")}`,
     },
     keywords: recipe?.tags,
     category: recipe?.category,
-  }
+  };
 }
 const page = async ({ params }: { params: Promise<{ id: string }> }) => {
   const id = (await params).id;

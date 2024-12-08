@@ -7,7 +7,6 @@ export default function Layout({
     <main className="font-work-sans">
       <Navbar />
       {children}
-
     </main>
   );
 }

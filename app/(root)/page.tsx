@@ -1,4 +1,4 @@
-import RecipeCard from "@/components/RecipeCard";
+import CarouselRecipe from "@/components/RecipeCard";
 import SearchForm from "@/components/SearchForm";
 import { RECIPE_QUERY } from "@/lib/query";
 import { sanityFetch, SanityLive } from "@/sanity/lib/live";
@@ -11,7 +11,9 @@ export default async function Home({
   const query = (await searchParams).query;
   const params = { search: query || null };
   const { data: recipes } = await sanityFetch({ query: RECIPE_QUERY, params });
-
+  const mostViewedRecipes = [...recipes]
+    .sort((a, b) => (b.views || 0) - (a.views || 0))
+    .slice(0, 10);
   return (
     <main>
       <section className="hero-container">
@@ -22,18 +24,32 @@ export default async function Home({
         </p>
         <SearchForm query={query} />
       </section>
+      {!query && (
+        <section className="section-wrapper">
+          <h2 className="text-heading mb-8">{"Most viewed Recipes"}</h2>
 
+          {recipes.length ? (
+            <div className="relative w-full">
+              <CarouselRecipe recipe={mostViewedRecipes} items={2} />
+            </div>
+          ) : (
+            <div className="text-center py-12">
+              <p className="text-slate-600">
+                No recipes found. Why not be the first to create one?
+              </p>
+            </div>
+          )}
+        </section>
+      )}
       <section className="section-wrapper">
         <h2 className="text-heading mb-8">
           {query ? `Search Results for "${query}"` : "Latest Recipes"}
         </h2>
 
-        {recipes.length > 0 ? (
-          <ul className="grid-cards">
-            {recipes.map((recipe) => (
-              <RecipeCard recipe={recipe} key={recipe._id} />
-            ))}
-          </ul>
+        {recipes.length ? (
+          <div className="relative w-full">
+            <CarouselRecipe recipe={recipes} items={3} />
+          </div>
         ) : (
           <div className="text-center py-12">
             <p className="text-slate-600">

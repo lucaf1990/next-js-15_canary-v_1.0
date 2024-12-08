@@ -4,7 +4,7 @@ import { client } from "@/sanity/lib/client";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Pencil, Mail, User } from "lucide-react";
-import RecipeCard from "@/components/RecipeCard";
+import CarouselRecipe from "@/components/RecipeCard";
 
 const page = async ({ params }: { params: Promise<{ id: string }> }) => {
   const session = await auth();
@@ -86,12 +86,11 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
               ? "You still have no recipes published"
               : `Chef ${user.name}'s has ${detailsRecipes.length} recipes published`}
           </h2>
+
           {detailsRecipes.length ? (
-            <ul className="grid-cards-user-profile">
-              {detailsRecipes.slice(0, 5).map((recipe) => (
-                <RecipeCard key={recipe._id} recipe={recipe} />
-              ))}
-            </ul>
+            <div className="relative w-full">
+              <CarouselRecipe recipe={detailsRecipes} items={2} />
+            </div>
           ) : null}
         </div>
       </div>

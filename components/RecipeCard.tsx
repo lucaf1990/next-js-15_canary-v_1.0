@@ -7,6 +7,13 @@ import {
   RECIPE_QUERYResult,
 } from "@/sanity/types";
 import { formatDate } from "@/lib/utils";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselPrevious,
+  CarouselNext,
+} from "./ui/carousel";
 
 export type RecipeType =
   | RECIPE_QUERYResult[number]
@@ -92,4 +99,41 @@ const RecipeCard = ({ recipe }: { recipe: RecipeType }) => {
   );
 };
 
-export default RecipeCard;
+const CarouselRecipe = ({
+  recipe,
+  items,
+}: {
+  recipe: RecipeType[];
+  items: number;
+}) => {
+  return (
+    <Carousel
+      opts={{
+        align: "start",
+      }}
+    >
+      <div className="group relative">
+        <CarouselContent className="-ml-4">
+          {recipe.slice(0, 5).map((recipe) => (
+            <CarouselItem
+              key={recipe._id}
+              className={`pl-4 basis-full sm:basis-1/2 ${
+                items === 2
+                  ? "lg:basis-1/2"
+                  : items === 3
+                    ? "lg:basis-1/3"
+                    : "lg:basis-1/2"
+              }`}
+            >
+              <RecipeCard recipe={recipe} />
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+        <CarouselPrevious className="absolute -left-12 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity" />
+        <CarouselNext className="absolute -right-12 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity" />
+      </div>
+    </Carousel>
+  );
+};
+
+export default CarouselRecipe;
