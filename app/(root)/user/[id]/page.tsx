@@ -89,7 +89,7 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
 
           {detailsRecipes.length ? (
             <div className="relative w-full">
-              <CarouselRecipe recipe={detailsRecipes} items={2} />
+              <CarouselRecipe recipe={detailsRecipes} />
             </div>
           ) : null}
         </div>

@@ -99,13 +99,7 @@ const RecipeCard = ({ recipe }: { recipe: RecipeType }) => {
   );
 };
 
-const CarouselRecipe = ({
-  recipe,
-  items,
-}: {
-  recipe: RecipeType[];
-  items: number;
-}) => {
+const CarouselRecipe = ({ recipe }: { recipe: RecipeType[] }) => {
   return (
     <Carousel
       opts={{
@@ -117,13 +111,7 @@ const CarouselRecipe = ({
           {recipe.slice(0, 5).map((recipe) => (
             <CarouselItem
               key={recipe._id}
-              className={`pl-4 basis-full sm:basis-1/2 ${
-                items === 2
-                  ? "lg:basis-1/2"
-                  : items === 3
-                    ? "lg:basis-1/3"
-                    : "lg:basis-1/2"
-              }`}
+              className="pl-4 basis-full sm:basis-1/2 lg:basis-1/3"
             >
               <RecipeCard recipe={recipe} />
             </CarouselItem>

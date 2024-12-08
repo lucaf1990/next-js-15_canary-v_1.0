@@ -30,7 +30,7 @@ export default async function Home({
 
           {recipes.length ? (
             <div className="relative w-full">
-              <CarouselRecipe recipe={mostViewedRecipes} items={2} />
+              <CarouselRecipe recipe={mostViewedRecipes} />
             </div>
           ) : (
             <div className="text-center py-12">
@@ -48,7 +48,7 @@ export default async function Home({
 
         {recipes.length ? (
           <div className="relative w-full">
-            <CarouselRecipe recipe={recipes} items={3} />
+            <CarouselRecipe recipe={recipes} />
           </div>
         ) : (
           <div className="text-center py-12">

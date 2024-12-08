@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
-import { SpeedInsights } from "@vercel/speed-insights/next"
-
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Analytics } from "@vercel/analytics/next";
 const workSans = localFont({
   src: [
     { path: "./fonts/WorkSans-Black.ttf", weight: "900", style: "normal" },
@@ -32,7 +32,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${workSans.variable}`}>
-        {children} <Toaster /> <SpeedInsights />
+        {children} <Toaster /> <SpeedInsights /> <Analytics />
       </body>
     </html>
   );

@@ -15,16 +15,13 @@ import DeleteRecipeDialog from "@/components/deleteRecipeDialog";
 export const experimental_ppr = true;
 import type { Metadata, ResolvingMetadata } from "next";
 
-// Add the generateMetadata function before your page component
 export async function generateMetadata(
   { params }: { params: Promise<{ id: string }> },
-  parent: ResolvingMetadata,
+  parent: ResolvingMetadata
 ): Promise<Metadata> {
-  // Get the id and fetch recipe data
   const id = (await params).id;
-  const recipe = await client.fetch(RECIPE_QUERY_BY_ID, { id });
+  const recipe = await client.withConfig({useCdn: false}).fetch(RECIPE_QUERY_BY_ID, { id });
 
-  // Get parent metadata (if any)
   const previousImages = (await parent).openGraph?.images || [];
 
   return {
@@ -60,11 +57,11 @@ export async function generateMetadata(
 }
 const page = async ({ params }: { params: Promise<{ id: string }> }) => {
   const id = (await params).id;
-  const detailsRecipes = await client.fetch(RECIPE_QUERY_BY_ID, { id });
+  const detailsRecipes = await client.withConfig({useCdn: false}).fetch(RECIPE_QUERY_BY_ID, { id });
 
   if (!detailsRecipes) return notFound();
   const session = await auth();
-  console.log(typeof session?.user?.id);
+  console.log(detailsRecipes);
   return (
     <main className="min-h-screen bg-slate-50 pb-20">
       {/* Full-width hero image with overlay */}
@@ -73,8 +70,8 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
         {/* Title and description section */}
 
         <div className="pb-10 pt-10">
-          {detailsRecipes.author._id === session?.user?.id && (
-            <div className="flex gap-2">
+          {session?.user?.id === detailsRecipes.author._id && (
+            <div className="flex gap-2 mb-4">
               <ViewRecipeDialog recipe={detailsRecipes} />
               <DeleteRecipeDialog
                 deleteRecipe={async () => {
@@ -180,7 +177,7 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
                       <span className="recipe-ingredient-checkbox" />
                       {ingredient}
                     </li>
-                  ),
+                  )
                 )}
               </ul>
               <div className="recipe-tags-container">
@@ -202,7 +199,18 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
                   Instructions
                 </h2>
                 <div className="recipe-instructions">
-                  {detailsRecipes.steps}
+                  {detailsRecipes.steps
+                    .split("\n")
+                    .map((step: string, index: number) => {
+                      return (
+                        <li
+                          key={index}
+                          className="text-gray-700 leading-relaxed pl-2"
+                        >
+                          {step}
+                        </li>
+                      );
+                    })}
                 </div>
               </div>
             </div>
