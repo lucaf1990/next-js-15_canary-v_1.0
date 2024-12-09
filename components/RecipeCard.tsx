@@ -108,7 +108,7 @@ const CarouselRecipe = ({ recipe }: { recipe: RecipeType[] }) => {
     >
       <div className="group relative">
         <CarouselContent className="-ml-4">
-          {recipe.slice(0, 5).map((recipe) => (
+          {recipe.map((recipe) => (
             <CarouselItem
               key={recipe._id}
               className="pl-4 basis-full sm:basis-1/2 lg:basis-1/3"
