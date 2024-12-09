@@ -1,26 +1,24 @@
-import { auth } from "@/auth";
 import { FIND_USER_RECIPE_BY_ID_QUERY, GOOGLE_AUTHOR_QUERY } from "@/lib/query";
 import { client } from "@/sanity/lib/client";
 import Image from "next/image";
-import { Button } from "@/components/ui/button";
-import { Pencil, Mail, User } from "lucide-react";
+import { Mail, User } from "lucide-react";
 import CarouselRecipe from "@/components/RecipeCard";
+import { auth } from "@/auth";
 
 const page = async ({ params }: { params: Promise<{ id: string }> }) => {
-  const session = await auth();
   const id = (await params).id;
   const user = await client.fetch(GOOGLE_AUTHOR_QUERY, { id });
-  const isOwnProfile = session?.user?.id === id;
   const detailsRecipes = await client.fetch(FIND_USER_RECIPE_BY_ID_QUERY, {
     id,
   });
+  const session = await auth();
   return (
     <main className="min-h-screen bg-slate-50 py-12">
-      <div className="max-w-4xl mx-auto px-6">
+      <div className="max-w-6xl mx-auto px-6">
         {/* Profile Header */}
         <div className="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
           {/* Cover Image */}
-          <div className="h-48 bg-gradient-to-r from-primary-100 to-primary-50" />
+          <div className="h-48 bg-gradient-to-r from-primary-100 to-primary-500" />
 
           {/* Profile Info */}
           <div className="px-8 pb-8">
@@ -33,15 +31,6 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
                 height={128}
                 className="rounded-full border-4 border-white shadow-lg"
               />
-              {isOwnProfile && (
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="absolute bottom-0 right-0 rounded-full"
-                >
-                  <Pencil className="w-4 h-4" />
-                </Button>
-              )}
             </div>
 
             {/* User Info */}
@@ -55,22 +44,25 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
                     <p className="mt-2 text-slate-600">{user.bio}</p>
                   )}
                 </div>
-                {isOwnProfile && (
-                  <Button variant="outline">Edit Profile</Button>
-                )}
               </div>
 
               {/* Contact Info */}
-              <div className="flex flex-wrap gap-4 pt-4 border-t border-slate-100">
-                <div className="flex items-center gap-2 text-slate-600">
-                  <Mail className="w-4 h-4" />
-                  <span>{user.email}</span>
-                </div>
+              <div className="gap-4 pt-4 border-t border-slate-100">
+                {session?.user?.id === id && (
+                  <div className="flex items-center gap-2 text-slate-600">
+                    <Mail className="w-4 h-4" />
+                    <span>{user.email}</span>
+                  </div>
+                )}
                 <div className="flex items-center gap-2 text-slate-600">
                   <User className="w-4 h-4" />
                   <span>
                     Member since{" "}
-                    {new Date(user._createdAt).toLocaleDateString()}
+                    {new Date(user._createdAt).toLocaleDateString("it-IT", {
+                      year: "numeric",
+                      month: "numeric",
+                      day: "numeric",
+                    })}
                   </span>
                 </div>
               </div>
@@ -78,7 +70,6 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
           </div>
         </div>
 
-        {/* Recipe Grid */}
         {/* Recipe Grid */}
         <div className="mt-8">
           <h2 className="text-xl font-semibold text-slate-900 mb-6">
@@ -88,7 +79,7 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
           </h2>
 
           {detailsRecipes.length ? (
-            <div className="relative w-full">
+            <div className="w-full">
               <CarouselRecipe recipe={detailsRecipes} />
             </div>
           ) : null}

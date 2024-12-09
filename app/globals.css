@@ -130,11 +130,11 @@
   }
   /* Recipe Card */
   .recipe-card {
-    @apply bg-white rounded-2xl overflow-hidden flex flex-col gap-0 border border-slate-100 shadow-sm hover:shadow-xl transition-all duration-300 relative;
+    @apply bg-white rounded-2xl overflow-hidden flex flex-col border border-slate-100 shadow-sm hover:shadow-2xl transition-all duration-300 relative h-[500px];
   }
 
   .recipe-card-image-wrapper {
-    @apply relative h-64 w-full overflow-hidden;
+    @apply relative h-52 w-full overflow-hidden flex-shrink-0;
   }
 
   .recipe-card-image {
@@ -150,15 +150,18 @@
   }
 
   .recipe-card-content {
-    @apply p-6 flex flex-col gap-4;
+    @apply p-6 flex flex-col flex-grow;
   }
 
   .recipe-card-header {
-    @apply flex items-center justify-between mb-2;
+    @apply flex items-center justify-between mb-2 flex-shrink-0;
   }
 
   .recipe-card-author {
     @apply flex items-center gap-3;
+  }
+  .recipe-card-main {
+    @apply flex flex-col flex-grow justify-between;
   }
 
   .recipe-card-author-image {
@@ -168,17 +171,15 @@
   .recipe-card-meta {
     @apply flex items-center gap-4 text-sm text-slate-500;
   }
-
   .recipe-card-title {
-    @apply text-2xl font-bold text-slate-900 leading-tight hover:text-primary-600 transition-colors line-clamp-2;
+    @apply text-2xl font-bold text-slate-900 leading-tight hover:text-primary-600 transition-colors h-[3.5rem] line-clamp-2;
   }
 
   .recipe-card-description {
-    @apply text-slate-600 line-clamp-2 mt-2;
+    @apply text-slate-600 line-clamp-2 mt-2 h-[3rem];
   }
-
   .recipe-card-footer {
-    @apply flex justify-between items-center pt-4 mt-4 border-t border-slate-100;
+    @apply flex justify-between items-center pt-4 mt-auto border-t border-slate-100 flex-shrink-0;
   }
 
   .recipe-card-stats {

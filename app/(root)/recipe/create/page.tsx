@@ -193,7 +193,7 @@ const RecipeForm = () => {
                     <SelectTrigger id="category">
                       <SelectValue placeholder="Select category" />
                     </SelectTrigger>
-                    <SelectContent>
+                    <SelectContent className="bg-white">
                       {[
                         "Breakfast",
                         "Lunch",

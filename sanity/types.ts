@@ -193,12 +193,13 @@ export type AllSanitySchemaTypes =
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: lib/query.ts
 // Variable: RECIPE_QUERY
-// Query: *[_type == "recipe"     && defined(slug.current)     && !defined($search) || title match $search || category match $search || author->name match $search]     | order(_createdAt desc) {    _id,    _createdAt,    author -> {      _id,      name,      image,      bio,    },    title,    views,    image,    description,    category,}
+// Query: *[_type == "recipe"     && defined(slug.current)     && !defined($search) || title match $search || category match $search || author->name match $search]     | order(_createdAt desc) {    _id,    _createdAt,    author -> {      _id,      name,      image,      bio,    },    tags,    title,    views,    image,    description,    category,}
 export type RECIPE_QUERYResult = Array<
   | {
       _id: string;
       _createdAt: string;
       author: null;
+      tags: null;
       title: null;
       views: null;
       image: string | null;
@@ -209,6 +210,7 @@ export type RECIPE_QUERYResult = Array<
       _id: string;
       _createdAt: string;
       author: null;
+      tags: null;
       title: string | null;
       views: null;
       image: null;
@@ -224,6 +226,7 @@ export type RECIPE_QUERYResult = Array<
         image: string | null;
         bio: string | null;
       };
+      tags: Array<string>;
       title: string;
       views: number;
       image: string;
@@ -274,10 +277,11 @@ export type VIEWS_QUERY_BY_IDResult = {
   views: number;
 } | null;
 // Variable: FIND_USER_RECIPE_BY_ID_QUERY
-// Query: *[_type == "recipe"   &&  author-> _id match $id]   | order(_createdAt desc) {  _id,  _createdAt,  author -> {    _id,    name,    image,    bio,  },  title,  views,  image,  description,  category,}
+// Query: *[_type == "recipe"   &&  author-> _id match $id]   | order(_createdAt desc) {  _id,  _createdAt,  tags,  author -> {    _id,    name,    image,    bio,  },  title,  views,  image,  description,  category,}
 export type FIND_USER_RECIPE_BY_ID_QUERYResult = Array<{
   _id: string;
   _createdAt: string;
+  tags: Array<string>;
   author: {
     _id: string;
     name: string | null;
@@ -301,9 +305,9 @@ export type FIND_USER_RECIPE_BY_ID_QUERYResult = Array<{
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    '*[_type == "recipe" \n    && defined(slug.current) \n    && !defined($search) || title match $search || category match $search || author->name match $search] \n    | order(_createdAt desc) {\n    _id,\n    _createdAt,\n    author -> {\n      _id,\n      name,\n      image,\n      bio,\n    },\n    title,\n    views,\n    image,\n    description,\n    category,\n}': RECIPE_QUERYResult;
+    '*[_type == "recipe" \n    && defined(slug.current) \n    && !defined($search) || title match $search || category match $search || author->name match $search] \n    | order(_createdAt desc) {\n    _id,\n    _createdAt,\n    author -> {\n      _id,\n      name,\n      image,\n      bio,\n    },\n    tags,\n    title,\n    views,\n    image,\n    description,\n    category,\n}': RECIPE_QUERYResult;
     '*[_type == "recipe" && _id == $id][0]{\n    _id,\n    _createdAt,\n    slug,\n    author -> {\n      _id,\n      name,\n      image,\n      bio,\n      username,\n    },\n    title,\n    views,\n    image,\n    description,\n    category,\n    ingredients,\n    tags,\n    steps,\n    cookingTime,\n    servings,\n}': RECIPE_QUERY_BY_IDResult;
     '*[_type == "recipe" && _id == $id][0]{\n  _id,\n  views\n  }': VIEWS_QUERY_BY_IDResult;
-    '*[_type == "recipe" \n  &&  author-> _id match $id] \n  | order(_createdAt desc) {\n  _id,\n  _createdAt,\n  author -> {\n    _id,\n    name,\n    image,\n    bio,\n  },\n  title,\n  views,\n  image,\n  description,\n  category,\n}': FIND_USER_RECIPE_BY_ID_QUERYResult;
+    '*[_type == "recipe" \n  &&  author-> _id match $id] \n  | order(_createdAt desc) {\n  _id,\n  _createdAt,\n  tags,\n  author -> {\n    _id,\n    name,\n    image,\n    bio,\n  },\n  title,\n  views,\n  image,\n  description,\n  category,\n}': FIND_USER_RECIPE_BY_ID_QUERYResult;
   }
 }

@@ -12,6 +12,7 @@ export const RECIPE_QUERY = defineQuery(`*[_type == "recipe"
       image,
       bio,
     },
+    tags,
     title,
     views,
     image,
@@ -69,6 +70,7 @@ export const FIND_USER_RECIPE_BY_ID_QUERY = defineQuery(`*[_type == "recipe"
   | order(_createdAt desc) {
   _id,
   _createdAt,
+  tags,
   author -> {
     _id,
     name,

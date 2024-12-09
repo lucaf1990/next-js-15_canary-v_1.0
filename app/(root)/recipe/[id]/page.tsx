@@ -17,10 +17,12 @@ import type { Metadata, ResolvingMetadata } from "next";
 
 export async function generateMetadata(
   { params }: { params: Promise<{ id: string }> },
-  parent: ResolvingMetadata
+  parent: ResolvingMetadata,
 ): Promise<Metadata> {
   const id = (await params).id;
-  const recipe = await client.withConfig({useCdn: false}).fetch(RECIPE_QUERY_BY_ID, { id });
+  const recipe = await client
+    .withConfig({ useCdn: false })
+    .fetch(RECIPE_QUERY_BY_ID, { id });
 
   const previousImages = (await parent).openGraph?.images || [];
 
@@ -57,7 +59,9 @@ export async function generateMetadata(
 }
 const page = async ({ params }: { params: Promise<{ id: string }> }) => {
   const id = (await params).id;
-  const detailsRecipes = await client.withConfig({useCdn: false}).fetch(RECIPE_QUERY_BY_ID, { id });
+  const detailsRecipes = await client
+    .withConfig({ useCdn: false })
+    .fetch(RECIPE_QUERY_BY_ID, { id });
 
   if (!detailsRecipes) return notFound();
   const session = await auth();
@@ -177,7 +181,7 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
                       <span className="recipe-ingredient-checkbox" />
                       {ingredient}
                     </li>
-                  )
+                  ),
                 )}
               </ul>
               <div className="recipe-tags-container">
@@ -205,7 +209,7 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
                       return (
                         <li
                           key={index}
-                          className="text-gray-700 leading-relaxed pl-2"
+                          className="text-gray-700 leading-relaxed pl-2 list-none"
                         >
                           {step}
                         </li>

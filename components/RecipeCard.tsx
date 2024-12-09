@@ -29,6 +29,7 @@ const RecipeCard = ({ recipe }: { recipe: RecipeType }) => {
     description,
     image,
     category,
+    tags,
   } = recipe;
 
   return (
@@ -78,27 +79,26 @@ const RecipeCard = ({ recipe }: { recipe: RecipeType }) => {
           </div>
         </div>
 
-        <div>
-          <Link href={`/recipe/${_id}`}>
-            <h3 className="recipe-card-title">{title}</h3>
-          </Link>
-          <p className="recipe-card-description">{description}</p>
-        </div>
+        <div className="recipe-card-main">
+          <div>
+            <Link href={`/recipe/${_id}`}>
+              <h3 className="recipe-card-title">{title}</h3>
+            </Link>
+            <p className="recipe-card-description">{description}</p>
+          </div>
 
-        <div className="recipe-card-footer">
-          <div className="recipe-card-meta">{formatDate(_createdAt)}</div>
-          <Link href={`/recipe/${_id}`}>
-            <button className="recipe-card-button">
-              View Recipe
-              <ArrowRight className="w-4 h-4" />
-            </button>
-          </Link>
+          <div className="recipe-card-footer">
+            {tags?.slice(0, 3).map((tag: string, i: number) => (
+              <span key={i} className="recipe-tag">
+                #{tag}
+              </span>
+            ))}
+          </div>
         </div>
       </div>
     </li>
   );
 };
-
 const CarouselRecipe = ({ recipe }: { recipe: RecipeType[] }) => {
   return (
     <Carousel
@@ -117,8 +117,8 @@ const CarouselRecipe = ({ recipe }: { recipe: RecipeType[] }) => {
             </CarouselItem>
           ))}
         </CarouselContent>
-        <CarouselPrevious className="absolute -left-12 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity" />
-        <CarouselNext className="absolute -right-12 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity" />
+        <CarouselPrevious className="bg-primary-500  text-white  absolute -left-12 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity" />
+        <CarouselNext className="bg-primary-500 text-white absolute -right-12 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity" />
       </div>
     </Carousel>
   );
