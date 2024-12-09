@@ -44,7 +44,7 @@
   }
 
   .heading-hero {
-    @apply bg-white/90 backdrop-blur-sm px-8 py-4 font-bold text-slate-900 sm:text-5xl text-3xl max-w-5xl text-center my-8 rounded-2xl shadow-lg;
+    @apply bg-white/90 backdrop-blur-sm px-8 py-4 font-bold sm:text-5xl text-3xl max-w-5xl text-center my-8 rounded-2xl shadow-lg;
   }
 
   .sub-heading-hero {

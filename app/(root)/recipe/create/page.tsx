@@ -86,7 +86,7 @@ const RecipeForm = () => {
         tags,
         steps: formData.get("steps") as string,
       };
-      console.log(JSON.stringify(formValues))
+      console.log(JSON.stringify(formValues));
       await formSchema.parseAsync(formValues);
 
       // Send enhanced form data
@@ -137,7 +137,7 @@ const RecipeForm = () => {
   return (
     <main className="min-h-screen bg-slate-50 pb-20">
       <div className="container-section">
-        <h1 className="heading-hero">Create Your Recipe</h1>
+        <h1 className="heading-hero text-primary-500">Create Your Recipe</h1>
         <p className="sub-heading-hero">
           Share your culinary masterpiece with the world
         </p>
@@ -319,7 +319,10 @@ const RecipeForm = () => {
             <Textarea
               name="steps"
               className="form-textarea"
-              placeholder="Describe the preparation steps"
+              placeholder={`Describe the preparation steps:\n
+              1. Prepare...
+              2. Cook...
+              3. Fill...`}
               rows={6}
               required
             />

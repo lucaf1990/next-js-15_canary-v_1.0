@@ -59,7 +59,7 @@ export const createRecipe = async (state: unknown, form: FormData) => {
       views: 0,
       image: formData.image,
       description: formData.description,
-      category: (formData.category as string),
+      category: formData.category as string,
       ingredients: ingredients,
       tags: tags,
       steps: formData.steps,

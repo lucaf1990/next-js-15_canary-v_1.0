@@ -106,7 +106,7 @@ const CarouselRecipe = ({ recipe }: { recipe: RecipeType[] }) => {
         align: "start",
       }}
     >
-      <div className="group relative">
+      <div className="group relative mx-10">
         <CarouselContent className="-ml-4">
           {recipe.map((recipe) => (
             <CarouselItem
