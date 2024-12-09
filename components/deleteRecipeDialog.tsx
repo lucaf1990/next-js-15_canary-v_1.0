@@ -34,7 +34,7 @@ const DeleteRecipeDialog = ({ deleteRecipe }: DeleteRecipeDialogProps) => {
         </DialogHeader>
         <DialogFooter>
           <form action={deleteRecipe}>
-            <Button className="bg-primary-500" type="submit" variant="outline">
+            <Button className="bg-primary-500 text-white" type="submit" variant="outline">
               Delete Recipe
             </Button>
           </form>

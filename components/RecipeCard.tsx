@@ -36,7 +36,7 @@ const RecipeCard = ({ recipe }: { recipe: RecipeType }) => {
     <li className="recipe-card group">
       <div className="recipe-card-image-wrapper">
         <Image
-          src={image || "/fallback-recipe.jpg"}
+          src={image || ""}
           alt={title || "Recipe"}
           width={500}
           height={300}

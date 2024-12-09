@@ -83,7 +83,7 @@ const ViewRecipeDialog = ({
           title: "Success!",
           description: "Your recipe has been updated successfully.",
           variant: "default",
-          className: "bg-green-500 text-white",
+          className: "bg-primary-500 text-white",
         });
         setOpen(false);
         router.refresh();
@@ -98,6 +98,7 @@ const ViewRecipeDialog = ({
           title: "Validation Error",
           description: "Please check all required fields",
           variant: "destructive",
+          className: "bg-red-500 text-white",
         });
         return { ...prevState, error: "Validation failed", status: "error" };
       }

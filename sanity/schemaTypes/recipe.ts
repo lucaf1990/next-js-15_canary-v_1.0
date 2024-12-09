@@ -43,9 +43,6 @@ export const recipe = defineType({
     defineField({
       name: "category",
       type: "string",
-      options: {
-        list: ["Breakfast", "Lunch", "Dinner", "Dessert", "Snack", "Appetizer"],
-      },
       validation: (Rule) => Rule.required(),
     }),
     defineField({

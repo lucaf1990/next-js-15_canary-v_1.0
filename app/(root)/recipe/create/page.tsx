@@ -86,7 +86,7 @@ const RecipeForm = () => {
         tags,
         steps: formData.get("steps") as string,
       };
-
+      console.log(JSON.stringify(formValues))
       await formSchema.parseAsync(formValues);
 
       // Send enhanced form data
@@ -96,6 +96,8 @@ const RecipeForm = () => {
         toast({
           title: "Success!",
           description: "Your recipe has been created successfully.",
+          variant: "destructive",
+          className: "bg-primary-500 text-white",
         });
         router.push(`/recipe/${result.id}`);
       }
@@ -110,6 +112,7 @@ const RecipeForm = () => {
           title: "Validation Error",
           description: "Please check all required fields",
           variant: "destructive",
+          className: "bg-red-500 text-white",
         });
         return { ...prevState, error: "Validation failed", status: "error" };
       }
@@ -118,6 +121,7 @@ const RecipeForm = () => {
         title: "Error",
         description: "Something went wrong. Please try again.",
         variant: "destructive",
+        className: "bg-red-500 text-white",
       });
       return { ...prevState, error: "Something went wrong", status: "error" };
     }
@@ -202,7 +206,7 @@ const RecipeForm = () => {
                         "Snack",
                         "Appetizer",
                       ].map((cat) => (
-                        <SelectItem key={cat} value={cat.toLowerCase()}>
+                        <SelectItem key={cat} value={cat}>
                           {cat}
                         </SelectItem>
                       ))}
