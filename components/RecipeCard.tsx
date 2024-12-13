@@ -117,8 +117,8 @@ const CarouselRecipe = ({ recipe }: { recipe: RecipeType[] }) => {
             </CarouselItem>
           ))}
         </CarouselContent>
-        <CarouselPrevious className="bg-primary-500  text-white  absolute -left-12 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity" />
-        <CarouselNext className="bg-primary-500 text-white absolute -right-12 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity" />
+        <CarouselPrevious className="bg-primary-500 sm:hidden md:block  text-white  absolute -left-12 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity" />
+        <CarouselNext className="bg-primary-500 sm:hidden md:block text-white absolute -right-12 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity" />
       </div>
     </Carousel>
   );

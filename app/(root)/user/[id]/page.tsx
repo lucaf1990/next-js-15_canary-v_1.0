@@ -15,14 +15,9 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
   return (
     <main className="min-h-screen bg-slate-50 py-12">
       <div className="max-w-6xl mx-auto px-6">
-        {/* Profile Header */}
         <div className="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
-          {/* Cover Image */}
           <div className="h-48 bg-gradient-to-r from-primary-100 to-primary-500" />
-
-          {/* Profile Info */}
           <div className="px-8 pb-8">
-            {/* Avatar */}
             <div className="relative -mt-16 mb-4">
               <Image
                 src={user.image}
@@ -32,8 +27,6 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
                 className="rounded-full border-4 border-white shadow-lg"
               />
             </div>
-
-            {/* User Info */}
             <div className="space-y-4">
               <div className="flex justify-between items-start">
                 <div>
@@ -45,8 +38,6 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
                   )}
                 </div>
               </div>
-
-              {/* Contact Info */}
               <div className="gap-4 pt-4 border-t border-slate-100">
                 {session?.user?.id === id && (
                   <div className="flex items-center gap-2 text-slate-600">
@@ -69,8 +60,6 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
             </div>
           </div>
         </div>
-
-        {/* Recipe Grid */}
         <div className="mt-8">
           <h2 className="text-xl font-semibold text-slate-900 mb-6">
             {detailsRecipes.length === 0

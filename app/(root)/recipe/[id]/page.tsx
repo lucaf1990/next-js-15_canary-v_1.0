@@ -46,13 +46,6 @@ export async function generateMetadata(
       publishedTime: recipe?._createdAt,
       authors: recipe?.author.name,
     },
-    twitter: {
-      card: "summary_large_image",
-      title: recipe?.title,
-      description: recipe?.description,
-      images: [recipe?.image || ""],
-      creator: `@${recipe?.author?.name?.replace(/\s+/g, "")}`,
-    },
     keywords: recipe?.tags,
     category: recipe?.category,
   };
@@ -68,11 +61,7 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
   console.log(detailsRecipes);
   return (
     <main className="min-h-screen bg-slate-50 pb-20">
-      {/* Full-width hero image with overlay */}
-
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-30">
-        {/* Title and description section */}
-
         <div className="pb-10 pt-10">
           {session?.user?.id === detailsRecipes.author._id && (
             <div className="flex gap-2 mb-4">
@@ -93,8 +82,6 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
             </p>
           </div>
         </div>
-
-        {/* Image section */}
         <div className="w-full flex justify-center">
           <div className="relative h-[45vh] min-h-[400px] max-h-[500px] w-full lg:w-3/4">
             <Image
@@ -112,9 +99,7 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
           </div>
         </div>
       </div>
-      {/* Main content */}
       <div className="max-w-5xl mx-auto px-6 top-[-30px] relative z-10">
-        {/* Stats cards */}
         <div className="recipe-stats-grid">
           <div className="recipe-stat-card">
             <Clock className="recipe-stat-icon" />
@@ -145,10 +130,7 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
             </div>
           </div>
         </div>
-
-        {/* Two-column layout for main content */}
         <div className="mt-12 grid lg:grid-cols-5 gap-8">
-          {/* Left column - Author and ingredients */}
           <div className="lg:col-span-2 space-y-8">
             <div className="recipe-author-card">
               <div className="relative w-20 h-20">
@@ -193,8 +175,6 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
               </div>
             </div>
           </div>
-
-          {/* Right column - Description and steps */}
           <div className="lg:col-span-3">
             <div className="recipe-content-card">
               <div>
