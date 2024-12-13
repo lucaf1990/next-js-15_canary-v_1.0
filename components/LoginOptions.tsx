@@ -39,6 +39,19 @@ export function LoginDialog() {
           </DialogTitle>
         </DialogHeader>
 
+        <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 mb-4">
+          <p className="text-amber-800 text-sm">
+            By signing in with GitHub or Google, you agree to share:
+          </p>
+          <ul className="list-disc list-inside text-amber-700 text-sm mt-2">
+            <li>Your name</li>
+            <li>Email address</li>
+            <li>Profile picture</li>
+            <li>Username (from provider)</li>
+            <li>Bio (from GitHub)</li>
+          </ul>
+        </div>
+
         <div className="flex gap-4 py-6 bg-white">
           <form
             action={async () => {
@@ -54,7 +67,6 @@ export function LoginDialog() {
               Continue with GitHub
             </Button>
           </form>
-
           <form
             action={async () => {
               "use server";
@@ -75,7 +87,6 @@ export function LoginDialog() {
         <div className="flex justify-center">
           <span className="w-2/3 border-t border-slate-200" />
         </div>
-
         <p className="text-center text-sm text-slate-500">
           By continuing, you agree to our Terms of Service and Privacy Policy.
         </p>
